@@ -15,6 +15,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.hello import router as hello_router
+# from app.routes.upload import router as upload_router
 
 app = FastAPI(title="CapsightAI Backend", version="0.1.0")
 
@@ -29,7 +30,7 @@ app.add_middleware(
 
 # Mount versioned API routes under /api to clearly separate concerns
 app.include_router(hello_router, prefix="/api")
-
+# app.include_router(upload_router, prefix="/api")
 @app.get("/")
 def root():
     """Health/info endpoint for quick verification."""
