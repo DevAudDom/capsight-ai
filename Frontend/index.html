@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapSight - Pitch Deck & Investor Platform</title>
+    <!-- Importing Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Code Block --- */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+        :root {
+            --primary-color: #007bff; /* Professional Blue */
+            --secondary-color: #28a745; /* Green for Action/Submit */
+            --tertiary-color: #f7a000; /* Gold/Orange for Investor/Premium */
+            --background-dark: #1e2531;
+            --background-light: #f4f7f6;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --card-bg: #ffffff;
+            --shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            
+            /* NEW: Subtle Background Pattern */
+            background-color: var(--background-light); /* Base background light color */
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,.03) 1px, transparent 1px, transparent 10px);
+            background-size: 20px 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 900;
+        }
+        
+        .brand-name {
+            color: var(--primary-color);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 1200px; /* Wider container to fit the pricing table */
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        /* --- Global Card/Form Styling --- */
+        .card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 2em;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        /* --- Home View Specifics --- */
+        #homeView .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        #homeView .cta-buttons .cta-card {
+            flex: 1;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #homeView .cta-buttons .cta-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #homeView .cta-buttons .cta-card h3 {
+            color: var(--background-dark);
+            font-size: 1.5em;
+        }
+
+        .cta-button {
+            display: inline-block;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .founder-btn { background-color: var(--secondary-color); }
+        .founder-btn:hover { background-color: #1e7e34; }
+        
+        .investor-btn { background-color: var(--tertiary-color); }
+        .investor-btn:hover { background-color: #cc8000; }
+
+
+        /* --- Form Styling --- */
+        .form-group {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], input[type="file"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; 
+            transition: border-color 0.3s;
+        }
+        
+        input[type="file"]:focus, textarea:focus, 
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* --- ROLE SELECTOR FIX --- */
+        .role-selector {
+            display: flex; /* Use flexbox for horizontal alignment */
+            gap: 30px;
+            justify-content: flex-start; /* Align left */
+            padding-top: 5px;
+        }
+        .role-selector .role-option {
+            /* Ensure the radio button and text stay together */
+            display: inline-flex;
+            align-items: center;
+        }
+        .role-selector label {
+            /* Reset the global label settings that make it a block element */
+            display: inline;
+            font-weight: 400; /* Use normal font weight for the option description */
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        .role-selector input[type="radio"] {
+            width: auto; /* Reset width for radio button */
+            margin-right: 8px; /* Space between radio button and text */
+        }
+
+
+        /* Buttons */
+        .app-btn {
+            width: 100%;
+            color: var(--text-light);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 20px;
+        }
+        
+        #registerBtn { background-color: var(--primary-color); }
+        #registerBtn:hover { background-color: #0056b3; }
+        
+        #submitBtn { background-color: var(--secondary-color); }
+        #submitBtn:hover { background-color: #1e7e34; }
+
+
+        /* --- Investor Dashboard & Pricing Table --- */
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .pricing-table th {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        .pricing-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .tier-name {
+            font-weight: 900;
+            font-size: 1.1em;
+        }
+        .select-plan-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+        .select-plan-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Investor Dashboard Nav */
+        #investorNav {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        #investorNav button {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            color: #888;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        #investorNav button.active-nav {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        /* Filter and Deck Grid Container */
+        .dashboard-content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Added for responsiveness */
+            gap: 10px; /* Added for responsiveness */
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            margin-bottom: 0;
+            display: inline;
+        }
+        
+        .filter-group select {
+            width: 200px; /* Specific width for select */
+            padding: 8px;
+            font-size: 0.9em;
+        }
+
+        /* Deck Card Grid Styling */
+        .deck-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0;
+        }
+
+        .deck-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            min-height: 300px; /* Ensure uniform height for aesthetics */
+            border: 1px solid #e0e0e0;
+            position: relative; /* CRITICAL: For absolute positioning of favorite button */
+        }
+
+        .deck-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Favorite Button Position */
+        .favorite-btn {
+            position: absolute; /* Position relative to the deck-card */
+            top: 15px; 
+            right: 15px; 
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9); /* Slight background for visibility */
+            color: #dc3545; /* Red heart icon */
+            font-size: 1.2em;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s, transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1; /* Fix vertical alignment of emoji */
+        }
+
+        .favorite-btn:hover {
+            background: #ffebeb;
+            transform: scale(1.1);
+        }
+        .favorite-btn.favorited {
+            color: #dc3545; 
+        }
+
+
+        .card-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f4f4f4;
+        }
+
+        .card-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--background-dark);
+            margin: 0;
+            line-height: 1.2;
+            /* Ensure title doesn't overlap the favorite button */
+            padding-right: 40px; 
+        }
+
+        .card-sector {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .card-summary {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            padding: 15px 20px;
+            background-color: #f7f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .deck-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .deck-actions button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .view-deck-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .view-deck-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Deck Detail View Styling */
+        #deckDetailView {
+            padding: 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: #f0f8ff;
+        }
+        #deckDetailView h3 {
+            color: var(--background-dark);
+            font-size: 1.8em;
+            margin-top: 10px;
+        }
+        #deckDetailView p strong {
+            color: var(--primary-color);
+        }
+        
+        /* Analysis Section */
+        .analysis-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .analysis-section h4 {
+            color: var(--background-dark);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        /* Scores Grid Styling */
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .score-item {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f7f7f7;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .score-item strong {
+            display: block;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .score-value {
+            font-size: 2em;
+            font-weight: 900;
+            color: var(--secondary-color); /* Default to green/success */
+        }
+        /* Red Flags Styling */
+        .red-flag-list {
+            list-style: none;
+            padding: 0;
+        }
+        .red-flag-list li {
+            background-color: #f8d7da; /* Light Red/Warning Background */
+            color: #721c24; /* Dark Red Text */
+            border: 1px solid #f5c6cb;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 5px;
+            list-style: none;
+            font-weight: 700;
+        }
+        .suggestion-list {
+            list-style: none;
+            padding: 0;
+        }
+        .suggestion-list li {
+            background-color: #d4edda; /* Light Green/Suggestion Background */
+            color: #155724; /* Dark Green Text */
+            border: 1px solid #c3e6cb;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 5px;
+            list-style: none;
+        }
+        
+        /* --- Founder Payment Gate --- */
+        #founderPaymentGate {
+            text-align: center;
+            border: 2px solid var(--secondary-color);
+        }
+        #founderPaymentGate h2 {
+            color: var(--secondary-color);
+        }
+        .pay-founder-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-top: 25px;
+            transition: background-color 0.3s;
+        }
+        .pay-founder-btn:hover { background-color: #1e7e34; }
+
+        /* --- Utility & Footer --- */
+        .hidden {
+            display: none !important;
+        }
+
+        #message, #registerMessage {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: opacity 0.3s;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: #aaa;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="header-content">
+            <h1><span class="brand-name">CapSight</span></h1>
+            <nav>
+                <a href="#" data-view="home" class="nav-link active">Home</a>
+                <a href="#" data-view="submit" class="nav-link">Submit Deck</a>
+                <a href="#" data-view="investor" class="nav-link">Angel Investors</a>
+                <a href="#" data-view="register" class="nav-link">Register / Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- --- 1. HOME VIEW --- -->
+        <section id="homeView" class="view">
+            <div class="card" style="text-align: center; padding: 60px;">
+                <h2>Unlock Your Funding Potential</h2>
+                <p class="subtitle" style="font-size: 1.3em;">
+                    CapSight connects ambitious founders with the strategic capital they need, starting with an expert pitch deck review.
+                </p>
+                <div class="cta-buttons">
+                    <div class="cta-card">
+                        <h3>For Founders</h3>
+                        <p>Get your pitch deck professionally analyzed and perfected before approaching investors.</p>
+                        <a href="#" class="cta-button founder-btn" data-view="submit">Submit My Deck</a>
+                    </div>
+                    <div class="cta-card">
+                        <h3>For Angel Investors</h3>
+                        <p>Access a curated, high-quality pipeline of startups that are ready for funding.</p>
+                        <a href="#" class="cta-button investor-btn" data-view="investor">View Deal Flow</a>
+                    </div>
+                </div>
+                <p style="margin-top: 30px;">
+                    <!-- FIX: This link now correctly uses the data-view navigation logic -->
+                    <a href="#" data-view="register" style="color: var(--primary-color); font-weight: 700;">New to CapSight? Create a Free Account</a>
+                </p>
+            </div>
+        </section>
+        
+        <!-- --- 2. ACCOUNT REGISTRATION VIEW --- -->
+        <section id="registerView" class="view hidden">
+            <div class="card">
+                <h2>Join CapSight</h2>
+                <p class="subtitle">Create your account to submit decks or access our investor deal flow.</p>
+
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" placeholder="you@startup.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Minimum 8 characters" required>
+                </div>
+                
+                <!-- UPDATED ROLE SELECTOR HTML -->
+                <div class="form-group">
+                    <label>I am a...</label>
+                    <div class="role-selector">
+                        <div class="role-option">
+                            <input type="radio" id="roleFounder" name="userRole" value="founder" checked>
+                            <label for="roleFounder">Founder (Pitch Deck Review)</label>
+                        </div>
+                        <div class="role-option">
+                            <input type="radio" id="roleInvestor" name="userRole" value="investor">
+                            <label for="roleInvestor">Angel Investor (Deal Flow Access)</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- END UPDATED ROLE SELECTOR -->
+
+                <button id="registerBtn" class="app-btn">Create Account</button>
+                <p id="registerMessage" class="hidden"></p>
+            </div>
+        </section>
+
+
+        <!-- --- 3. SUBMIT DECK VIEW (FOUNDERS) --- -->
+        <section id="submitView" class="view hidden">
+            
+            <!-- FOUNDER PAYMENT GATE -->
+            <div id="founderPaymentGate" class="card">
+                <span style="font-size: 3em;">💡</span>
+                <h2>One-Time Deck Analysis Fee</h2>
+                <p class="subtitle">To maintain the highest quality of feedback, CapSight charges a one-time fee for expert review and investor readiness preparation.</p>
+                <p style="font-size: 2.5em; font-weight: 900; color: var(--secondary-color); margin-bottom: 20px;">$199.00</p>
+                <p>This fee includes a guaranteed 48-hour detailed report and access to our Founder-only preparation materials.</p>
+                <button class="pay-founder-btn" onclick="simulateFounderPayment()">Proceed to Payment (Simulated)</button>
+            </div>
+
+            <!-- FOUNDER SUBMISSION FORM (Initially Hidden) -->
+            <div id="founderSubmissionForm" class="card hidden">
+                <p class="subtitle" style="text-align: left; margin-top: -20px;">
+                    ✅ **Payment Complete.** You can now upload your materials below.
+                </p>
+
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" placeholder="e.g., Nexus AI Solutions" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pitchDeckFile">Upload Pitch Deck (PDF or PPTX only)</label>
+                    <input type="file" id="pitchDeckFile" accept=".pdf, .pptx, .ppt" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactEmail">Best Contact Email (For Feedback Delivery)</label>
+                    <input type="email" id="contactEmail" placeholder="e.g., founder@startup.co" required>
+                </div>
+                
+                <button id="submitBtn" class="app-btn">Submit Deck for Analysis</button>
+
+                <p id="message" class="hidden"></p>
+            </div>
+        </section>
+
+        <!-- --- 4. INVESTOR VIEW (ANGELS) --- -->
+        <section id="investorView" class="view hidden">
+            <div class="card">
+                
+                <!-- INVESTOR SUBSCRIPTION GATE (Visible to Unsubscribed Investors) -->
+                <section id="subscriptionGate">
+                    <h2 style="color: var(--tertiary-color);">Unlock Exclusive Deal Flow Access</h2>
+                    <p class="subtitle">Subscribe to one of our plans tailored for serious angel investors and venture capital funds.</p>
+
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th>Monthly Price</th>
+                                <th>Usage Limit (Decks)</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="investorPricingBody">
+                            <!-- Data populated by JavaScript -->
+                        </tbody>
+                    </table>
+                    
+                    <p style="margin-top: 30px;"><a href="#" onclick="simulateSubscription('Growth')">Test Investor View (Click to Subscribe to Growth)</a></p>
+                </section>
+
+                <!-- INVESTOR DASHBOARD (Visible to Subscribed Users) -->
+                <section id="investorDashboard" class="hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="text-align: left; margin: 0; color: var(--background-dark);">Investor Dashboard</h2>
+                        <button class="view-deck-btn" style="background-color: #dc3545;" onclick="simulateLogout()">Logout</button>
+                    </div>
+                    
+                    <!-- Investor Sub-Navigation -->
+                    <div id="investorNav">
+                        <button id="navDealFlow" class="active-nav" onclick="navigateInvestorSubViews('dealFlow')">Main Deal Flow</button>
+                        <button id="navFavorites" onclick="navigateInvestorSubViews('favorites')">My Favorites</button>
+                    </div>
+                    
+                    <!-- Sub-View 1: Main Deck Card Grid -->
+                    <div id="dealFlowView" class="investor-subview">
+                        
+                        <!-- NEW: Filter Group -->
+                        <div class="dashboard-content-header">
+                            <p style="margin: 0; color: #555;">Showing curated decks ready for review.</p>
+                            <div class="filter-group">
+                                <label for="sectorFilter">Filter by Sector:</label>
+                                <select id="sectorFilter" onchange="applySectorFilter()">
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Updated to use a div for the card grid -->
+                        <div id="deckList" class="deck-grid">
+                            <!-- Decks render here -->
+                        </div>
+                    </div>
+
+                    <!-- Sub-View 2: Favorites Card Grid -->
+                    <div id="favoritesView" class="investor-subview hidden">
+                        <p id="favoritesMessage">View decks you have bookmarked below.</p>
+                        <!-- Updated to use a div for the card grid -->
+                        <div id="favoriteDeckList" class="deck-grid">
+                            <!-- Favorite decks render here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Sub-View 3: Deck Detail View (Analysis) -->
+                    <div id="deckDetailView" class="investor-subview hidden">
+                        <!-- Details are rendered here by viewDeckDetails() -->
+                    </div>
+
+                </section>
+                
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <span class="brand-name">CapSight</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- JavaScript Code Block ---
+        
+        // --- DATA AND STATE ---
+        const PITCH_DECKS = [
+            { 
+                id: 101, 
+                title: 'AI-Powered E-Commerce Analytics', 
+                sector: 'Software (SaaS)', 
+                raised: '$500k Seed', 
+                logoUrl: 'https://placehold.co/60x60/007bff/ffffff?text=AI', // Blue AI logo
+                summary: 'A SaaS platform using deep learning to optimize e-commerce conversion rates and inventory management. The team has shown strong technical ability but needs to validate sales scalability.', 
+                insight: 'Founded by two ex-Google AI engineers, Nexus AI offers a proprietary algorithm that predicts product demand fluctuations with 98% accuracy. The market is fragmented, but Nexus focuses on mid-market D2C brands, which is a key segment. Funds will be primarily used for hiring a dedicated sales team and scaling cloud infrastructure.',
+                scores: {
+                    marketSize: 8,
+                    teamStrength: 9,
+                    traction: 7,
+                    unitEconomics: 6,
+                    defensibility: 8
+                },
+                suggestions: [
+                    "Clearly define the integration path for popular e-commerce platforms (Shopify, WooCommerce) to ease adoption.",
+                    "Provide more granular customer retention data over a 12-month period.",
+                    "Outline a clear path to profitability (3-5 year financial forecast) for the next pitch deck."
+                ],
+                redFlags: [
+                    "High customer acquisition cost (CAC) relative to competitors in early pilot models.",
+                    "Dependency on a single founder for proprietary AI model development and maintenance."
+                ]
+            },
+            { 
+                id: 102, 
+                title: 'Sustainable Vertical Farming', 
+                sector: 'AgriTech', 
+                raised: '$2M Series A', 
+                logoUrl: 'https://placehold.co/60x60/28a745/ffffff?text=Farm', // Green Farm logo
+                summary: 'Develops modular, sustainable indoor vertical farms for urban centers, reducing transport costs and carbon footprint. Excellent product validation but regulatory hurdles are present.', 
+                insight: 'The company uses a closed-loop hydroponic system powered by renewable energy. This Series A funding will unlock the acquisition of two centralized distribution centers in key metropolitan areas and automate the planting/harvesting process using robotics. This is a capital-intensive model with high potential returns if scaling works.',
+                scores: {
+                    marketSize: 9,
+                    teamStrength: 7,
+                    traction: 8,
+                    unitEconomics: 5,
+                    defensibility: 7
+                },
+                suggestions: [
+                    "Focus Q3 roadmap on achieving full operational efficiency in one pilot site before expanding the team.",
+                    "Seek government subsidies or green grants to offset initial CapEx.",
+                    "Develop a strong PR narrative around food security and climate change."
+                ],
+                redFlags: [
+                    "Unproven cost-effectiveness at full commercial scale compared to traditional farming.",
+                    "Significant reliance on local city/state permitting and real estate acquisition timelines."
+                ]
+            },
+            { 
+                id: 103, 
+                title: 'Decentralized Finance (DeFi) Wallet', 
+                sector: 'FinTech', 
+                raised: '$750k Pre-Seed', 
+                logoUrl: 'https://placehold.co/60x60/f7a000/ffffff?text=DeFi', // Gold DeFi logo
+                summary: 'A non-custodial wallet focused on secure, compliant DeFi access for institutional investors. Strong alignment with a growing regulated market segment.', 
+                insight: 'Compliance is the core differentiator. This wallet integrates robust KYC/AML features directly, making it palatable for regulated firms entering the DeFi space. The pre-seed round aims to complete legal setup in three key jurisdictions (US, EU, Singapore) and grow the regulatory engineering team.',
+                scores: {
+                    marketSize: 7,
+                    teamStrength: 8,
+                    traction: 5,
+                    unitEconomics: 8,
+                    defensibility: 9
+                },
+                suggestions: [
+                    "Develop a clear API strategy for institutional integration (e.g., custodians).",
+                    "Conduct penetration testing and public bug bounty program to prove security commitment.",
+                    "Show clear user growth projections for the first 18 months."
+                ],
+                redFlags: [
+                    "The regulatory landscape is highly volatile and could shift against the product overnight.",
+                    "Competition from established traditional financial (TradFi) institutions developing their own regulated solutions."
+                ]
+            },
+            { 
+                id: 104, 
+                title: 'Remote Mental Wellness Platform', 
+                sector: 'HealthTech', 
+                raised: '$1M Seed', 
+                logoUrl: 'https://placehold.co/60x60/dc3545/ffffff?text=Well', // Red Wellness logo
+                summary: 'Provides personalized, on-demand therapeutic services tailored for remote workers and corporate wellness programs. Excellent timing and massive market need.', 
+                insight: 'The platform uses an AI model to match users with specialized therapists based on career stress profiles. They operate on a lucrative B2B subscription model for employers. The current funding round will be used to integrate biofeedback tools and expand into the competitive European corporate wellness market.',
+                scores: {
+                    marketSize: 10,
+                    teamStrength: 7,
+                    traction: 9,
+                    unitEconomics: 9,
+                    defensibility: 6
+                },
+                suggestions: [
+                    "Provide HIPAA/GDPR compliance details upfront.",
+                    "Outline partnership strategy with major HRIS/corporate benefits providers.",
+                    "Refine marketing message to focus on ROI (reduced sick days/turnover) for employers."
+                ],
+                redFlags: [
+                    "Low defensibility against large, horizontal B2B SaaS players who might copy the features.",
+                    "Potential burnout risk for the therapist network due to high demand."
+                ]
+            }
+        ];
+        
+        const INVESTOR_PLANS = [
+            { tier: 'Starter', price: '$99.99/month', limit: 'Up to 25 decks', color: '#007bff' },
+            { tier: 'Growth', price: '$299.99/month', limit: 'Up to 70 decks', color: '#28a745' },
+            { tier: 'Pro', price: '$499.99/month', limit: 'Up to 120 decks', color: '#f7a000' },
+            { tier: 'Premium', price: '$649.99/month', limit: 'Up to 165 decks', color: '#dc3545' },
+            { tier: 'Enterprise', price: '$999.99/month', limit: '250+ decks', color: '#1e2531' }
+        ];
+
+
+        // Mock database and authentication setup using sessionStorage
+        let users = JSON.parse(sessionStorage.getItem('capsight_users') || '[]');
+        let currentUserRole = sessionStorage.getItem('capsight_userRole');
+        let founderPaid = sessionStorage.getItem('capsight_founderPaid') === 'true'; // State for founder payment
+        let investorSubscribed = sessionStorage.getItem('capsight_investorSubscribed') === 'true'; // State for investor subscription
+        let currentView = 'home';
+        
+        // Favorites state storage (stores an array of deck IDs)
+        let favorites = JSON.parse(sessionStorage.getItem('capsight_favorites') || '[]');
+        
+        // --- CORE NAVIGATION LOGIC ---
+        
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        function initializeApp() {
+            // Updated selector to include any <a> tag with the data-view attribute
+            document.querySelectorAll('.nav-link, .cta-button, a[data-view]').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetView = this.getAttribute('data-view');
+                    if (targetView) {
+                        navigate(targetView);
+                    }
+                });
+            });
+            
+            // Populate the sector filter options once the app loads
+            populateSectorFilter();
+            
+            // Check for simulated login state and navigate accordingly
+            if (currentUserRole === 'founder') {
+                navigate('submit');
+            } else if (currentUserRole === 'investor') {
+                navigate('investor');
+            } else {
+                navigate('home');
+            }
+            
+            // Attach specific button handlers
+            document.getElementById('submitBtn').addEventListener('click', submitDeck);
+            document.getElementById('registerBtn').addEventListener('click', registerUser);
+        }
+        
+        function navigate(viewId) {
+            currentView = viewId;
+            // Hide all views
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            // Show the target view
+            document.getElementById(viewId + 'View').classList.remove('hidden');
+
+            // Update active navigation class
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-view') === viewId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Special initialization for specific views
+            if (viewId === 'investor') {
+                checkInvestorSubscription();
+            }
+            if (viewId === 'submit') {
+                checkFounderPayment();
+            }
+        }
+        
+        // --- FOUNDER SUBMIT DECK LOGIC (PAYMENT AND SUBMISSION) ---
+        
+        function checkFounderPayment() {
+            const gate = document.getElementById('founderPaymentGate');
+            const form = document.getElementById('founderSubmissionForm');
+            
+            if (founderPaid) {
+                gate.classList.add('hidden');
+                form.classList.remove('hidden');
+            } else {
+                gate.classList.remove('hidden');
+                form.classList.add('hidden');
+            }
+            document.getElementById('message').classList.add('hidden');
+        }
+
+        function simulateFounderPayment() {
+            const gateBtn = document.querySelector('.pay-founder-btn');
+            
+            gateBtn.textContent = 'Processing Payment...';
+            gateBtn.disabled = true;
+
+            setTimeout(() => {
+                // Mock success
+                founderPaid = true;
+                sessionStorage.setItem('capsight_founderPaid', 'true');
+                
+                checkFounderPayment(); // Show the form now
+                
+                gateBtn.textContent = 'Proceed to Payment (Simulated)';
+                gateBtn.disabled = false;
+            }, 2000); 
+        }
+
+        function submitDeck() {
+            if (!founderPaid) {
+                showMessage('Please complete the one-time Deck Analysis Fee payment first.', '#dc3545', '#f8d7da');
+                return;
+            }
+            
+            const companyNameInput = document.getElementById('companyName');
+            const fileInput = document.getElementById('pitchDeckFile');
+            const emailInput = document.getElementById('contactEmail');
+            
+            // Validation: Company Name, File, Email
+            if (companyNameInput.value.trim() === '' || !fileInput.files.length || emailInput.value.trim() === '' || !emailInput.value.trim().includes('@')) {
+                showMessage('Please ensure all required fields are completed and a file is selected.', '#dc3545', '#f8d7da');
+                return;
+            }
+
+            showMessage('Processing your submission...', '#ffc107', '#fff3cd');
+            document.getElementById('submitBtn').disabled = true;
+
+            setTimeout(() => {
+                const companyName = companyNameInput.value.trim();
+                const fileName = fileInput.files[0].name;
+                // Updated success message
+                showMessage(`✅ Success! Pitch deck for **${companyName}** ("${fileName}") submitted. Your analysis report will be delivered to ${emailInput.value} within 48 hours.`, '#28a745', '#d4edda'); 
+                
+                // Clear inputs after success
+                companyNameInput.value = '';
+                fileInput.value = '';
+                emailInput.value = '';
+                document.getElementById('submitBtn').disabled = false;
+            }, 2000); 
+        }
+
+        function showMessage(text, textColor, backgroundColor) {
+            const messageElement = document.getElementById('message');
+            messageElement.innerHTML = text; // Use innerHTML for bold text
+            messageElement.style.color = textColor;
+            messageElement.style.backgroundColor = backgroundColor;
+            messageElement.classList.remove('hidden');
+        }
+
+        // --- ACCOUNT REGISTRATION LOGIC ---
+        
+        function registerUser() {
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
+            const role = document.querySelector('input[name="userRole"]:checked').value;
+            const registerBtn = document.getElementById('registerBtn');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Basic Validation
+            if (name.length < 2 || !emailRegex.test(email) || password.length < 8) {
+                showRegisterMessage('Please ensure all fields are filled correctly (Name, valid Email, and Password must be 8+ chars).', '#dc3545', '#f8d7da');
+                return;
+            }
+
+            // Check if user already exists
+            if (users.find(u => u.email === email)) {
+                showRegisterMessage('Error: An account with this email already exists.', '#dc3545', '#f8d7da');
+                return;
+            }
+
+            // Simulate account creation
+            showRegisterMessage('Creating account...', '#ffc107', '#fff3cd');
+            registerBtn.disabled = true;
+
+            setTimeout(() => {
+                const newUser = { 
+                    id: users.length + 1, 
+                    name, 
+                    email, 
+                    role, 
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                sessionStorage.setItem('capsight_users', JSON.stringify(users));
+                
+                // Simulate immediate login
+                sessionStorage.setItem('capsight_userRole', newUser.role);
+                currentUserRole = newUser.role;
+                
+                showRegisterMessage(`✅ Welcome, ${name}! Your ${role} account is ready. Redirecting...`, '#28a745', '#d4edda');
+                
+                // Redirect based on role
+                setTimeout(() => {
+                    if (role === 'founder') {
+                        navigate('submit');
+                    } else {
+                        navigate('investor');
+                    }
+                    registerBtn.disabled = false;
+                }, 1500);
+
+            }, 2000); 
+        }
+
+        function showRegisterMessage(text, textColor, backgroundColor) {
+            const messageElement = document.getElementById('registerMessage');
+            messageElement.textContent = text;
+            messageElement.style.color = textColor;
+            messageElement.style.backgroundColor = backgroundColor;
+            messageElement.classList.remove('hidden');
+        }
+
+        function simulateLogout() {
+            sessionStorage.removeItem('capsight_userRole');
+            // Clear payment/subscription states on logout too
+            sessionStorage.removeItem('capsight_founderPaid');
+            sessionStorage.removeItem('capsight_investorSubscribed');
+            sessionStorage.removeItem('capsight_favorites'); // Clear favorites on logout
+            currentUserRole = null;
+            founderPaid = false;
+            investorSubscribed = false;
+            favorites = [];
+            navigate('home');
+            // Using a simple alert here as per previous context for non-critical flow
+            alert('You have been logged out.'); 
+        }
+
+        // --- INVESTOR VIEW LOGIC (SUBSCRIPTION, DASHBOARD, FAVORITES, FILTERING) ---
+        
+        function populateSectorFilter() {
+            const select = document.getElementById('sectorFilter');
+            if (!select) return; // Guard against running before element exists
+
+            // 1. Get unique sectors
+            const uniqueSectors = [...new Set(PITCH_DECKS.map(deck => deck.sector))].sort();
+            
+            // 2. Clear existing options
+            select.innerHTML = '<option value="all">All Sectors</option>';
+
+            // 3. Add unique sectors as options
+            uniqueSectors.forEach(sector => {
+                const option = document.createElement('option');
+                option.value = sector;
+                option.textContent = sector;
+                select.appendChild(option);
+            });
+        }
+        
+        function applySectorFilter() {
+            // This function is called onchange of the select dropdown
+            const selectedSector = document.getElementById('sectorFilter').value;
+            // Re-render the deal flow list with the new filter
+            renderDeckList(PITCH_DECKS, 'deckList', selectedSector);
+        }
+
+        function simulateSubscription(planName) {
+            // Simulates subscribing/unsubscribing for an already logged-in investor
+            
+            if (currentUserRole !== 'investor') {
+                 alert("Please log in as an Investor first.");
+                 navigate('register');
+                 return;
+            }
+            
+            if (planName) {
+                investorSubscribed = true;
+                sessionStorage.setItem('capsight_investorSubscribed', 'true');
+                alert(`Subscribed to the ${planName} Plan! Enjoy full access.`);
+            } else {
+                investorSubscribed = false;
+                sessionStorage.setItem('capsight_investorSubscribed', 'false');
+            }
+            checkInvestorSubscription();
+        }
+
+        function checkInvestorSubscription() {
+            const dashboard = document.getElementById('investorDashboard');
+            const gate = document.getElementById('subscriptionGate');
+            
+            // Check if the current user is an investor AND subscribed
+            if (currentUserRole === 'investor' && investorSubscribed) {
+                gate.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+                // Default to Deal Flow view
+                navigateInvestorSubViews('dealFlow'); 
+            } else {
+                // If not logged in as investor, or not subscribed, show gate and pricing
+                dashboard.classList.add('hidden');
+                gate.classList.remove('hidden');
+                renderPricingTable();
+            }
+        }
+        
+        function navigateInvestorSubViews(subView) {
+            const subViews = document.querySelectorAll('.investor-subview');
+            subViews.forEach(view => view.classList.add('hidden'));
+            
+            document.getElementById(subView + 'View').classList.remove('hidden');
+
+            // Update sub-navigation active state
+            document.querySelectorAll('#investorNav button').forEach(btn => {
+                btn.classList.remove('active-nav');
+            });
+            document.getElementById('nav' + subView.charAt(0).toUpperCase() + subView.slice(1)).classList.add('active-nav');
+
+            // Render content for the selected view
+            if (subView === 'dealFlow') {
+                // Re-render deal flow with current filter selection
+                const selectedSector = document.getElementById('sectorFilter').value;
+                renderDeckList(PITCH_DECKS, 'deckList', selectedSector);
+            } else if (subView === 'favorites') {
+                renderFavoritesList();
+            }
+            // Detail view is rendered by viewDeckDetails
+        }
+
+        function renderPricingTable() {
+            const tbody = document.getElementById('investorPricingBody');
+            tbody.innerHTML = '';
+
+            INVESTOR_PLANS.forEach(plan => {
+                const row = tbody.insertRow();
+                
+                row.innerHTML = `
+                    <td class="tier-name" style="color: ${plan.color};">${plan.tier}</td>
+                    <td>${plan.price}</td>
+                    <td>${plan.limit}</td>
+                    <td><button class="select-plan-btn" onclick="simulateSubscription('${plan.tier}')">Select Plan</button></td>
+                `;
+            });
+        }
+        
+        function toggleFavorite(deckId) {
+            const id = parseInt(deckId);
+            const index = favorites.indexOf(id);
+
+            if (index === -1) {
+                // Not favorited, add it
+                favorites.push(id);
+            } else {
+                // Favorited, remove it
+                favorites.splice(index, 1);
+            }
+
+            sessionStorage.setItem('capsight_favorites', JSON.stringify(favorites));
+            
+            // Re-render the current list view to update button state
+            if (!document.getElementById('dealFlowView').classList.contains('hidden')) {
+                const selectedSector = document.getElementById('sectorFilter').value;
+                renderDeckList(PITCH_DECKS, 'deckList', selectedSector);
+            } else if (!document.getElementById('favoritesView').classList.contains('hidden')) {
+                renderFavoritesList();
+            }
+        }
+
+        function renderDeckList(decks, listElementId, sectorFilter = 'all') {
+            const listElement = document.getElementById(listElementId);
+            listElement.innerHTML = ''; 
+            
+            // Apply filtering logic
+            let filteredDecks = decks;
+            if (sectorFilter !== 'all') {
+                filteredDecks = decks.filter(deck => deck.sector === sectorFilter);
+            }
+
+            if (filteredDecks.length === 0) {
+                 listElement.innerHTML = '<p style="text-align: center; color: #999;">No decks found matching the selected criteria.</p>';
+                 return;
+            }
+
+            filteredDecks.forEach(deck => {
+                const isFavorited = favorites.includes(deck.id);
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'deck-card';
+                
+                cardDiv.innerHTML = `
+                    <!-- Favorite Button is now positioned absolutely at the top right -->
+                    <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" onclick="toggleFavorite(${deck.id})" title="${isFavorited ? 'Remove from Favorites' : 'Add to Favorites'}">
+                        ${isFavorited ? '❤️' : '♡'}
+                    </button>
+                    
+                    <div class="card-header">
+                        <img src="${deck.logoUrl}" alt="${deck.title} Logo" class="card-logo" onerror="this.onerror=null;this.src='https://placehold.co/60x60/cccccc/333333?text=Logo'">
+                        <div>
+                            <h5 class="card-title">${deck.title}</h5>
+                            <span class="card-sector">${deck.sector}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-summary">${deck.summary}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span style="font-weight: 700; color: #666; font-size: 0.9em;">Target: ${deck.raised}</span>
+                        <div class="deck-actions">
+                            <!-- Favorite button REMOVED from here -->
+                            <button class="view-deck-btn" onclick="viewDeckDetails(${deck.id})">Review Analysis</button>
+                        </div>
+                    </div>
+                `;
+                listElement.appendChild(cardDiv);
+            });
+        }
+        
+        function renderFavoritesList() {
+            const favoriteDecks = PITCH_DECKS.filter(deck => favorites.includes(deck.id));
+            const messageElement = document.getElementById('favoritesMessage');
+            
+            if (favoriteDecks.length === 0) {
+                messageElement.textContent = "You currently have no decks saved as favorites.";
+            } else {
+                messageElement.textContent = `You have ${favoriteDecks.length} deck(s) saved as favorites:`;
+            }
+            // Favorites list doesn't use the sector filter
+            renderDeckList(favoriteDecks, 'favoriteDeckList', 'all'); 
+        }
+        
+        // Helper function to determine score color
+        function getScoreColor(score) {
+            if (score >= 8) return 'var(--secondary-color)'; // Green (High)
+            if (score >= 6) return 'var(--tertiary-color)'; // Gold/Orange (Medium)
+            return '#dc3545'; // Red (Low)
+        }
+
+
+        function viewDeckDetails(id) {
+            const deck = PITCH_DECKS.find(d => d.id === id);
+            const detailView = document.getElementById('deckDetailView');
+
+            if (!deck) {
+                detailView.innerHTML = '<p>Error: Deck not found.</p>';
+                navigateInvestorSubViews('dealFlow');
+                return;
+            }
+            
+            // Generate HTML for scores
+            const scoresHtml = Object.entries(deck.scores).map(([key, value]) => {
+                // Format key: teamStrength -> Team Strength
+                const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                const color = getScoreColor(value);
+                return `
+                    <div class="score-item">
+                        <strong>${formattedKey}</strong>
+                        <span class="score-value" style="color: ${color};">${value}/10</span>
+                    </div>
+                `;
+            }).join('');
+            
+            // Generate HTML for suggestions
+            const suggestionsHtml = deck.suggestions.map(s => `<li>${s}</li>`).join('');
+
+            // Generate HTML for red flags
+            const redFlagsHtml = deck.redFlags.map(f => `<li>${f}</li>`).join('');
+
+            // Render the new structured analysis view
+            detailView.innerHTML = `
+                <!-- Back Button -->
+                <button class="view-deck-btn" style="background-color: #6c757d;" onclick="navigateInvestorSubViews('dealFlow')">← Back to Deal Flow</button>
+                <hr style="margin-top: 20px;">
+
+                <!-- Deck Title and Initial Info -->
+                <h3 style="color: var(--primary-color);">${deck.title}</h3>
+                <p><strong>Sector:</strong> ${deck.sector} | <strong>Funding Round:</strong> ${deck.raised}</p>
+                
+                <!-- 1. SUMMARY -->
+                <div class="analysis-section">
+                    <h4>Summary</h4>
+                    <p>${deck.summary}</p>
+                </div>
+
+                <!-- 2. SCORES -->
+                <div class="analysis-section">
+                    <h4>Scores (1-10)</h4>
+                    <div class="scores-grid">
+                        ${scoresHtml}
+                    </div>
+                    <p style="font-size: 0.9em; color: #999;">Scores are calculated based on CapSight's proprietary due diligence model, reflecting maturity and readiness.</p>
+                </div>
+                
+                <!-- 3. INSIGHTS -->
+                <div class="analysis-section">
+                    <h4>Deep Dive Insights</h4>
+                    <p style="border-left: 3px solid var(--primary-color); padding-left: 15px;">
+                        ${deck.insight}
+                    </p>
+                </div>
+
+                <!-- 4. SUGGESTIONS -->
+                <div class="analysis-section">
+                    <h4>Suggestions (Actionable Improvements)</h4>
+                    <ul class="suggestion-list">
+                        ${suggestionsHtml}
+                    </ul>
+                </div>
+                
+                <!-- 5. RED FLAGS -->
+                <div class="analysis-section">
+                    <h4><span style="color: #dc3545;">⚠️</span> Red Flags (Critical Risks)</h4>
+                    <ul class="red-flag-list">
+                        ${redFlagsHtml}
+                    </ul>
+                </div>
+                
+                <!-- Call to Action -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="view-deck-btn" style="background-color: var(--tertiary-color);" onclick="alert('Simulated: Full Pitch Deck PDF (for subscribed users only) is downloading.')">
+                        Download Full Pitch Deck
+                    </button>
+                </div>
+            `;
+            
+            navigateInvestorSubViews('deckDetail');
+        }
+
+    </script>
+</body>
+</html>
