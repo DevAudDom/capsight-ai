@@ -8,6 +8,7 @@ class Deck(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     deck_text = Column(String)
+    capsight_scores = Column(String)
     suggestions = Column(String)
     red_flags = Column(String)
 
