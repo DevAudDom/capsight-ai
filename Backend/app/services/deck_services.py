@@ -10,5 +10,5 @@ def create_deck(db: Session, data: DeckCreate):
     db.refresh(deck_instance)
     return deck_instance
 
-def get_user(db: Session, deck_id: int):
+def get_deck(db: Session, deck_id: int):
     return db.query(DeckModel).filter(DeckModel.id == deck_id).first()
