@@ -18,6 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from app.routes.upload import router as upload_router
 from app.routes.deck import router as deck_router
 from app.routes.user import router as user_router
+from app.routes.hello import router as hello_router
 
 app = FastAPI(title="CapsightAI Backend", version="0.1.0")
 
@@ -33,10 +34,23 @@ app.add_middleware(
 # Mount versioned API routes under /api to clearly separate concerns
 app.include_router(deck_router, prefix="/api")
 app.include_router(user_router, prefix="/api")
+app.include_router(hello_router, prefix="/api")
 # app.include_router(upload_router, prefix="/api")
 @app.get("/")
 def root():
     """Health/info endpoint for quick verification."""
     return {"status": "ok", "service": "capsightai-backend"}
+
+@app.on_event("startup")
+def log_routes():
+    # Print the registered routes for diagnostics
+    from fastapi.routing import APIRoute
+    route_paths = []
+    for route in app.router.routes:
+        if isinstance(route, APIRoute):
+            methods = "/".join(sorted(route.methods))
+            route_paths.append(f"{methods} {route.path}")
+    print("[startup] Registered routes:\n" + "\n".join(route_paths))
+    print("[startup] Server should be reachable at http://127.0.0.1:8000 (or http://localhost:8000)")
 
 
