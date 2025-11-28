@@ -33,8 +33,7 @@ npm start
 
 Backend:
 ```
-cd Backend
-run_backend.bat
+.\run_backend.bat
 ```
 
 Pitch Deck Grader:

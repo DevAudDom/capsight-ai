@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import List
 from app.schemas.deck import DeckCreate, Deck, DeckAnalytics
 from app.services import deck_services
 from app.models.db import get_db
@@ -37,12 +38,21 @@ def get_deck(deck_id: int, db: Session = Depends(get_db)):
 
 @router.post('/deck', response_model=Deck)
 def create_deck(deck_data: DeckCreate, db: Session = Depends(get_db)):
-  """Create a new deck."""
-  # Call the deck service to create a new deck in the database
+  """Create a new deck with AI analysis results.
+  
+  Expects:
+  - user_id, filename, timestamp
+  - verdict (string: 'Invest' or 'Pass')
+  - scores (object with 10 numeric scores)
+  - strengths, weaknesses, red_flags (arrays of strings)
+  """
   deck = deck_services.create_deck(db=db, data=deck_data)
-  # Check if deck creation failed
   if not deck:
-    # Raise an HTTP 400 error if creation failed
     raise HTTPException(status_code=400, detail="Failed to create deck")
-  # Return the newly created deck
   return deck
+
+@router.get('/deck/user/{user_id}', response_model=List[Deck])
+def get_user_decks(user_id: int, db: Session = Depends(get_db)):
+  """Get all decks for a specific user."""
+  decks = deck_services.get_decks_by_user(db=db, user_id=user_id)
+  return decks
