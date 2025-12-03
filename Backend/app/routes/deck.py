@@ -42,9 +42,10 @@ def create_deck(deck_data: DeckCreate, db: Session = Depends(get_db)):
   
   Expects:
   - user_id, filename, timestamp
-  - verdict (string: 'Invest' or 'Pass')
-  - scores (object with 10 numeric scores)
-  - strengths, weaknesses, red_flags (arrays of strings)
+  - verdict (string: 'Invest', 'Hold', or 'Pass')
+  - scores (object with overall_score and 6 category scores)
+  - suggestions (array of strings)
+  - red_flags (array of strings)
   """
   deck = deck_services.create_deck(db=db, data=deck_data)
   if not deck:

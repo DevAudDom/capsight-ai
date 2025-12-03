@@ -10,9 +10,8 @@ class Deck(Base):
     filename = Column(String)
     timestamp = Column(String)
     verdict = Column(String)
-    scores = Column(JSON)  # Stores: {"overall": 70, "problem": 75, "solution": 70, ...}
-    strengths = Column(JSON)  # Stores array of strings
-    weaknesses = Column(JSON)  # Stores array of strings
+    scores = Column(JSON)  # Stores: {"overall_score": 70, "problem_solution_fit": 75, ...}
+    suggestions = Column(JSON)  # Stores array of strings (AI suggestions)
     red_flags = Column(JSON)  # Stores array of strings
 
     user = relationship("User", back_populates="decks")
