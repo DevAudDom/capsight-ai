@@ -15,3 +15,5 @@ __pycache__/
 # IDE / Editor
 .vscode/
 .idea/
+
+.uploads_tmp/
