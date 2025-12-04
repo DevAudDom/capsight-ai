@@ -34,16 +34,6 @@ function Home() {
       <DataCard title="Welcome">
         <p>This is the React front end. Use the nav to switch pages.</p>
       </DataCard>
-
-      <div style={{ height: 16 }} />
-
-      <DataCard title="Backend API Call">
-        {/* Demonstrates basic async states: loading, error, success */}
-        {loading && <p className="muted">Loading…</p>}
-        {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
-        {!loading && !error && message && <p>Response: {message}</p>}
-        {!loading && !error && !message && <p className="muted">No data yet.</p>}
-      </DataCard>
     </div>
   );
 }
