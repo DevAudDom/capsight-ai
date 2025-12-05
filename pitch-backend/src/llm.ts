@@ -8,11 +8,26 @@ interface LlmOptions {
   apiKey: string;
 }
 
-const SYSTEM_PROMPT = `You are PitchGradeLiteV1.
+const SYSTEM_PROMPT = `You are PitchGradeLiteV1, an expert pitch deck evaluator.
 Return ONLY strict JSON matching the provided schema.
-Scores are 0-100 integers. Use conservative scoring.
-If input is [[UNREADABLE_DECK]] produce verdict "Hold" with red flag.
-No prose outside JSON.`;
+
+CRITICAL RULES FOR SCORES:
+- ALL score fields MUST be numeric integers (not strings, not words like "Fifty")
+- Score range: 0-100 (inclusive)
+- Use actual numbers: 50, 75, 85 (NOT "50", NOT "Fifty", NOT "seventy-five")
+- overall_score must be calculated as the average of all category scores
+- Use conservative but realistic scoring based on the pitch deck content
+
+VERDICT RULES:
+- verdict must be one of: "Poor", "Fair", "Good", "Great"
+- Poor: overall_score < 50 (significant weaknesses, not recommended)
+- Fair: overall_score 50-69 (has potential but major improvements needed)
+- Good: overall_score 70-84 (solid opportunity with some refinements needed)
+- Great: overall_score 85+ (exceptional opportunity, highly promising)
+- Do NOT use investment language (avoid "Invest", "Pass", "Consider")
+
+If input is [[UNREADABLE_DECK]], produce verdict "Fair" with appropriate red flag.
+No prose outside JSON. Ensure all numeric fields contain actual numbers.`;
 
 export async function gradeDeckText(filename: string, text: string, opts: LlmOptions): Promise<GradingResult> {
   const run_id = randomUUID();
@@ -70,11 +85,35 @@ function parseAndFill(raw: string, filename: string, run_id: string, timestamp: 
     obj.run_id ||= run_id;
     obj.filename ||= filename;
     obj.timestamp ||= timestamp;
-    if (!obj.verdict) obj.verdict = 'Hold';
+    if (!obj.verdict) obj.verdict = 'Fair';
+    
+    // Coerce all scores to numbers (in case LLM returns strings or text numbers)
+    if (obj.overall_score !== undefined) {
+      obj.overall_score = coerceToNumber(obj.overall_score, 0);
+    }
+    if (obj.scores) {
+      obj.scores.problem_solution_fit = coerceToNumber(obj.scores.problem_solution_fit, 0);
+      obj.scores.market_potential = coerceToNumber(obj.scores.market_potential, 0);
+      obj.scores.business_model_strategy = coerceToNumber(obj.scores.business_model_strategy, 0);
+      obj.scores.team_strength = coerceToNumber(obj.scores.team_strength, 0);
+      obj.scores.financials_and_traction = coerceToNumber(obj.scores.financials_and_traction, 0);
+      obj.scores.communication = coerceToNumber(obj.scores.communication, 0);
+    }
+    
     return obj as GradingResult;
   } catch (e: any) {
     return fallback(filename, run_id, timestamp, 'JSON parse error: ' + e.message);
   }
+}
+
+// Helper to convert string numbers or text to numeric, with bounds checking
+function coerceToNumber(value: any, fallback: number): number {
+  if (typeof value === 'number') return Math.max(0, Math.min(100, value));
+  if (typeof value === 'string') {
+    const num = parseFloat(value);
+    if (!isNaN(num)) return Math.max(0, Math.min(100, num));
+  }
+  return fallback;
 }
 
 function fallback(filename: string, run_id: string, timestamp: string, reason: string): GradingResult {
@@ -99,7 +138,7 @@ function fallback(filename: string, run_id: string, timestamp: string, reason: s
     },
     suggestions: [],
     red_flags: [reason],
-    verdict: 'Hold',
+    verdict: 'Fair',
     timestamp
   };
 }
