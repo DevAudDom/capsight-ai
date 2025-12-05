@@ -14,6 +14,9 @@ function ResultsPage() {
     const id = searchParams.get('id');
     if (id) {
       const item = getHistoryItem(id);
+      console.log('[ResultsPage] Retrieved item:', item);
+      console.log('[ResultsPage] Scores:', item?.scores);
+      console.log('[ResultsPage] Overall score:', item?.overall_score);
       setResult(item);
     }
     setLoading(false);
@@ -21,11 +24,22 @@ function ResultsPage() {
 
   const getVerdictClass = (verdict) => {
     switch (verdict?.toLowerCase()) {
-      case 'strong':
+      case 'great':
         return 'verdict-strong';
-      case 'moderate':
+      case 'good':
         return 'verdict-moderate';
-      case 'weak':
+      case 'fair':
+        return 'verdict-weak';
+      case 'poor':
+        return 'verdict-poor';
+      // Legacy support for old verdicts
+      case 'invest':
+        return 'verdict-strong';
+      case 'consider':
+      case 'hold':
+        return 'verdict-moderate';
+      case 'pass':
+      case 'avoid':
         return 'verdict-weak';
       default:
         return 'verdict-default';
@@ -158,7 +172,7 @@ function ResultsPage() {
       <div className="card verdict-card">
         <div className="verdict-content">
           <div className="verdict-item">
-            <p className="verdict-label muted">Verdict</p>
+            <p className="verdict-label muted">Potential Value</p>
             <span className={`verdict-badge ${getVerdictClass(result.verdict)}`}>
               {result.verdict}
             </span>
@@ -167,7 +181,7 @@ function ResultsPage() {
           <div className="verdict-item">
             <p className="verdict-label muted">Overall Score</p>
             <div className="overall-score">
-              {result.scores.overall_score}
+              {result.overall_score}
               <span className="score-suffix muted">/100</span>
             </div>
           </div>
@@ -180,33 +194,33 @@ function ResultsPage() {
         <div className="score-grid">
           <ScoreCard
             title="Problem-Solution Fit"
-            score={result.scores.problem_solution_fit}
+            score={result.scores?.problem_solution_fit || result.scores?.problem || 0}
           />
           <ScoreCard
             title="Market Potential"
-            score={result.scores.market_potential}
+            score={result.scores?.market_potential || result.scores?.market_size || result.scores?.market_validation || 0}
           />
           <ScoreCard
             title="Business Model"
-            score={result.scores.business_model_strategy}
+            score={result.scores?.business_model_strategy || result.scores?.business_model || 0}
           />
           <ScoreCard
             title="Team Strength"
-            score={result.scores.team_strength}
+            score={result.scores?.team_strength || result.scores?.team || 0}
           />
           <ScoreCard
             title="Financials & Traction"
-            score={result.scores.financials_and_traction}
+            score={result.scores?.financials_and_traction || result.scores?.financials || result.scores?.traction || 0}
           />
           <ScoreCard
             title="Communication"
-            score={result.scores.communication}
+            score={result.scores?.communication || result.scores?.solution || result.scores?.product || 0}
           />
         </div>
       </div>
 
       {/* Suggestions */}
-      {result.suggestions.length > 0 && (
+      {result.suggestions?.length > 0 && (
         <div className="card suggestions-card">
           <div className="card-header">
             <h3 className="card-title">
@@ -233,7 +247,7 @@ function ResultsPage() {
       )}
 
       {/* Red Flags */}
-      {result.red_flags.length > 0 && (
+      {result.red_flags?.length > 0 && (
         <div className="card red-flags-card">
           <div className="card-header">
             <h3 className="card-title">

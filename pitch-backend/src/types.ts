@@ -21,7 +21,7 @@ export interface GradingResult {
   };
   suggestions: string[];
   red_flags: string[];
-  verdict: "Invest" | "Hold" | "Pass";
+  verdict: "Poor" | "Fair" | "Good" | "Great";
   timestamp: string; // ISO
 }
 
@@ -63,7 +63,7 @@ export const gradingJsonSchema = {
     },
     suggestions: { type: "array", items: { type: "string" } },
     red_flags: { type: "array", items: { type: "string" } },
-    verdict: { type: "string", enum: ["Invest","Hold","Pass"] },
+    verdict: { type: "string", enum: ["Poor","Fair","Good","Great"] },
     timestamp: { type: "string" }
   },
   additionalProperties: false
